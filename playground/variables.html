@@ -10,6 +10,46 @@
 
 <body>
 
+  <script>// Wes uses const by default
+    // Wes will use let if he needs to change the value
+    // Wes won't start a variable name with capital (unless it's a class)
+    // ^^Start with [a-z] or "_" or "$"
+    // Wes uses camel-case "var iLovePizza;"
+    // Also snake case "var this_is_snake_case;"
+    //
+    // Also kabob-case (not allowed in JS) "var this-is-kabob-case;"
+
+    // Enforced by default with JS modules
+
+    // Different types of variables (var, let, const)
+    // Semi-colon ";" ends a "statement" in JS
+    let first = 'ian'; // variable declaration statement
+    let age = 300;
+    const cool = true;
+
+    console.log(first); // function call statement
+
+    if (age > 10) {
+      console.log('You are old!');
+    } // Code blocks are enclosed by {} and don't need a ";" to end
+
+    // var and let variables can be updated (only need to declare var and let once)
+    // Can't update a const variable (although this changes when we work with arrays)
+    first = 'kim';
+    age = 400;
+
+    // Technically can create a variable without var, let, or const, but it's bad practice
+    // dog = 'Bentley';
+    //
+    // ^^Can entirely prevent this behavior with "use strict;" ^^declared at beginning of script
+
+    let dog; // initialize a variable without assigning value
+    dog = 'Bentley';
+
+    // var variables are "function-scoped variables" --> only available in parent functions
+    // let and const variables are "block-scoped variables" --> only available in code blocks {}
+  </script>
+
 </body>
 
 </html>
