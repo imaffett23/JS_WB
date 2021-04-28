@@ -9,17 +9,48 @@
 </head>
 
 <body>
+  <p class="ian">I am Ian, I <em>to</em> BBQ and <strong>make websites.</strong></p>
   <div class="items">
+    <img class="nice cool" src="https://source.unsplash.com/random/600x600" />
+    <div class="img_div">
+      <img src="https://source.unsplash.com/random/300x300" />
+    </div>
     <p>Hi I'm a item</p>
     <div>
-      <h2>Sub Div</h2>
+      <h2>
+        Sub Div
+        <span>I am hidden!</span>
+      </h2>
       <p>Hi I'm a item</p>
 
     </div>
-    <img src="https://source.unsplash.com/random/300x300" />
+    <article class="item">
+      <h2>I am an article</h2>
+      <p class="pizza">This is how many pizzas I ate! 🍕</p>
+    </article>
+    <img class="custom" data-last="bos" data-name="wes" src="https://source.unsplash.com/random/200x200" />
+    <img data-name="ian" src="https://source.unsplash.com/random/200x200" />
+    <img data-name="kim" src="https://source.unsplash.com/random/200x200" />
+    <img data-name="bentley" src="https://source.unsplash.com/random/200x200" />
     <p>Hi I'm a item</p>
     <p>Hi I'm a item</p>
   </div>
+
+  <style>
+    h2 span {
+      display: none;
+    }
+
+    .round {
+      border-radius: 50%;
+      transition: all 0.2s;
+      transform: rotate(1turn) scale(2);
+      box-shadow: 0 0 10px black;
+    }
+  </style>
+
+  <script src="traversing.js"></script>
+
 </body>
 
 </html>
