@@ -10,6 +10,43 @@
 
 <body>
 
+  <script>
+    function buzzer() {
+      console.log('ENGGGGGG');
+    }
+
+    // First argument is callback function; second is time to stall (in ms)
+    // setTimeout will continue to run code after the call - ASYNCHRONUS NATURE OF JS
+    setTimeout(buzzer, 500);
+
+    // How often you want to run a callback
+    // setInterval(buzzer, 2000);
+
+    // setInterval only runs the first time after your first interval duration has expired (not
+    // not immediately on call). Would need custom function for immediate call
+    function setImmediateInterval(funcToRun, ms) {
+      // right away call function
+      funcToRun();
+      // run regular interval
+      return setInterval(funcToRun, ms);
+    }
+
+    setImmediateInterval(buzzer, 2000);
+
+    function destroy() {
+      document.body.innerHTML = `<p>DESTROYED!</p>`;
+    }
+
+    const bombTimer = setTimeout(destroy, 5000);
+
+    window.addEventListener('click', function () {
+      console.log('You saved the world!');
+      // How do I stop the "bomb timer"???
+      // setInterval timer works in the same way!
+      clearTimeout(bombTimer); // Stop the timer from running
+    });
+  </script>
+
 </body>
 
 </html>

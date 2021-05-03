@@ -101,6 +101,68 @@
     console.clear();
 
     // COERCION, TERNARIES, & CONDITIONAL ABUSE
+
+    const isCool = true;
+
+    // Coercion - force another data type into a real boolean
+    // "!!"" for coercion (one for opposite, one for coercion)
+    if (!isCool) {
+      console.log('You are not cool!');
+    }
+
+    // Ternary is a short hand if statement
+    const count = 2;
+    // let word;
+
+    // More verbose, traditional method
+    // if (count === 1) {
+    //   word = 'item';
+    // } else {
+    //   word = 'items';
+    // }
+
+    // More concise ternary method for simple true/false
+    // 1. Condition
+    // 2. What to do if true
+    // 3. What to do if false
+    const word = count === 1 ? 'item' : 'items';
+
+    // (Could even hard code the ternary directly into the sentence)
+    const sentence = `You have ${count} ${word} in your cart`;
+    console.log(sentence);
+
+    function showAdminBar() {
+      console.log('showing admin bar');
+    }
+    const isAdmin = true;
+
+    // AND AND TRICK!
+    function check1() {
+      return true;
+    }
+
+    function check2() {
+      return false;
+    }
+
+    function check3() {
+      return true;
+    }
+
+    // Can short circuit with || or && operators
+
+    if (check1() && check2() && check3()) {
+      console.log('all checks passed');
+    } else {
+      console.log('Some checks failed');
+    }
+
+    isAdmin ? showAdminBar() : null;
+    // (And And trick)
+    isAdmin && showAdminBar();
+
+    // Can also put if statement on one line (I wouldn't use that much?)
+    if (isAdmin) showAdminBar();
   </script>
 </body>
 
