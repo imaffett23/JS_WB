@@ -9,10 +9,98 @@
 </head>
 
 <body>
+
+  <h2>Truthy Values</h2>
+  * 1
+  * -10
+  * full string
+  * a string of "0"
+  <h2>Falsy Values</h2>
+  * 0
+  * undefined variable
+  * Variable set to null
+  * a variable set to `"hello" - 10` NaN
+  * empty string
+
   <script>
-    if (10 > 2) {
-      console.log('Yep');
+    const age = 50;
+    if (age > 70) {
+      // If the first one is true, the other ones won't be reached; would need three separate if
+      // statements instead
+      console.log('In your seventies');
+    } else if (age > 60) {
+      console.log('In your sixties');
+    } else if (age > 50) {
+      console.log('In your fifties');
+    } else {
+      // Run else when nothing was satisfied in if/else if statements
+      console.log('Nothing was true');
     }
+
+    function slugify(sentence, lowercase) {
+      const slug = sentence.replace(/\s/g, '-');
+      if (lowercase) {
+        return slug.toLowerCase();
+      }
+      return slug;
+    }
+
+    const name = 'ian';
+    const lastName = 'maf';
+
+    if (name === 'ian' || name === 'scott') {
+      // "||" for "or"
+      console.log('Cool Name!');
+    }
+
+    if (name === 'ian' && lastName === 'maf') {
+      // "&&" for "and"
+      console.log('Cool Full Name!');
+    }
+
+    const isInclusion = 'skian'.includes(name);
+    if (isInclusion) {
+      console.log('Cool inclusion!');
+    }
+
+    function nameIsSkian(name) {
+      return 'skian'.includes(name);
+    }
+
+    if (nameIsSkian(name)) {
+      console.log('Function inclusion!');
+    }
+
+    // Truthy and Falsy values are values which will return true or false
+    const values = [
+      [],
+      {},
+      -10,
+      1,
+      0,
+      '',
+      'full string',
+      ' ',
+      undefined,
+      NaN,
+      null,
+      '0️⃣',
+      '💩',
+    ];
+
+    console.group('truthy or falsy values');
+    values.forEach((value) => {
+      if (value) {
+        console.log(value, 'is truthy');
+      } else {
+        console.log(value, 'is falsy');
+      }
+    });
+    console.groupEnd();
+
+    console.clear();
+
+    // COERCION, TERNARIES, & CONDITIONAL ABUSE
   </script>
 </body>
 
