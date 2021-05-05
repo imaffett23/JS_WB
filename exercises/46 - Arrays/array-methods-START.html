@@ -12,14 +12,26 @@
 
 <body>
   <script>
-    const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
+    const toppings = [
+      'Mushrooms ',
+      'Tomatoes',
+      'Eggs',
+      'Chili',
+      'Lettuce',
+      'Avocado',
+      'Chiles',
+      'Bacon',
+      'Pickles',
+      'Onions',
+      'Cheese',
+    ];
 
     const buns = ['egg', 'wonder', 'brioche'];
 
     const meats = {
       beyond: 10,
       beef: 5,
-      pork: 7
+      pork: 7,
     };
 
     const prices = {
@@ -39,41 +51,96 @@
       { comment: 'I DONT LIKE BURGERS', rating: 1 },
     ];
 
-
     /*
       Static Methods
     */
 
-    // Array.of();
+    // Array.of(); // creates an array
+    const ofSample = Array.of('ian', 'kim');
+    console.log(ofSample);
 
     // Make a function that creates a range from x to y with Array.from();
+    function createRange(start, end) {
+      const range = Array.from({ length: end - start }, function (_, index) {
+        return index + start;
+      });
+      return range;
+    }
+
+    const myRange = createRange(3, 7);
+    console.log(myRange);
 
     // Check if the last array you created is really an array with Array.isArray();
+    console.log(Array.isArray(myRange));
 
     // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
+    Object.entries(meats).forEach((entry) => {
+      const [key, value] = entry;
+      console.log(key, value);
+    });
 
     /*
       Instance Methods
     */
 
     // Display all bun types with " or " - use join()
+    console.log(buns.join(' or '));
 
     // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+    const food = 'hot dogs,hamburgers,sausages,corn'.split(',');
+    console.log(food);
 
     // take the last item off toppings with pop()
-    // add it back with push()
-    // take the first item off toppings with shift()
-    // add it back in with unshift()
-    // Do the last four,but immutable (with spreads and new variables)
+    const lastTopping = toppings.pop();
+    console.log(lastTopping);
 
+    // add it back with push()
+    toppings.push(lastTopping);
+    console.log(toppings);
+
+    // take the first item off toppings with shift()
+    const firstItem = toppings.shift();
+    console.log(firstItem);
+
+    // add it back in with unshift()
+    toppings.unshift(firstItem);
+    console.log(toppings);
+
+    // Do the last four,but immutable (with spreads and new variables)
+    let newToppings = toppings.slice(0, toppings.length - 1);
+    newToppings = [...newToppings, toppings[toppings.length - 1]];
+    console.log(newToppings);
 
     // Make a copy of the toppings array with slice()
+    const toppingCopy = toppings.slice(0);
+    console.log(toppingCopy);
+
     // Make a copy of the toppings array with a spread
+    const toppingSpread = [...toppings];
+    console.log(toppingSpread);
+
     // take out items 3 to 5 of your new toppings array with splice()
+    toppingCopy.splice(3, 5);
+    console.log(toppingCopy);
+
     // find the index of Avocado with indexOf() / lastIndexOf()
+    const avoIndex = toppings.indexOf('Avocado');
+    console.log(avoIndex);
+
     // Check if hot sauce is in the toppings with includes()
     // add it if it's not
+    const isInToppings = toppings.includes('Hot Sauce');
+
+    if (!isInToppings) {
+      toppings.push('Hot Sauce');
+    }
+
+    console.log(toppings);
+
     // flip those toppings around with reverse()
+    toppings.reverse();
+
+    console.log(toppings);
 
     /*
       Callback Methods
@@ -93,7 +160,6 @@
     /*
       Looping Methods (next)
     */
-
   </script>
 </body>
 

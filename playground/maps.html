@@ -9,8 +9,41 @@
 </head>
 
 <body>
-  <script>
 
+  <ul class="prizes"></ul>
+
+  <script>
+    // MAPS ARE FOR STORING DATA, MAINTAINING ORDER,
+    const person1 = {
+      name: 'wes',
+      age: 200,
+    };
+
+    const myMap = new Map();
+    // .set() - set entries in the map
+    myMap.set('name', 'wes');
+    myMap.set(100, 'This is a number'); // Keys can be any type in a map!
+    myMap.set(person1, 'Really cool'); // Can even use objects!
+    console.log(myMap);
+    console.log(myMap.get(person1)); // Get information from a map
+
+    const score = 100;
+    const prizes = new Map();
+    prizes.set(100, 'Bear');
+    prizes.set(200, 'Duck');
+    prizes.set(300, 'Car');
+    console.log(`You win a ${prizes.get(score)}`);
+
+    // ORDER IS GUARANTEED IN A MAP
+    const ul = document.querySelector('.prizes');
+    for (const [points, prize] of prizes) {
+      const li = `<li>${points} - ${prize}</li>`;
+      ul.insertAdjacentHTML('beforeend', li);
+    }
+
+    // .has()
+
+// .delete()
   </script>
 </body>
 

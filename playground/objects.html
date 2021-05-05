@@ -9,9 +9,156 @@
 </head>
 
 <body>
-  <script>
 
+  <input type="text" name="first" value="ian">
+
+  <!--Load the Lodash JS script we'll need-->
+  <script src="https://unpkg.com/lodash"></script>
+  <script>
+    // Order not maintained in objects
+    const age = 100;
+    const person = {
+      // If property same name as var, can just put that
+      age,
+      name: 'ian',
+      // Can put hyphens, spaces, and numbers in property names (keys)
+      'cool-dude': true,
+      'really cool': false,
+      777: true,
+      // Sub-objects
+      clothing: {
+        shirts: 10,
+        pants: 2,
+      },
+      // Can also define functions for objects (methods)
+      sayHello(greeting = 'Hey') {
+        return `${greeting} ${this.name}`;
+      },
+      // Can also do arrow functions, but be careful.  They don't scope this to the object
+      sneeze: () => {
+        console.log('AHHH CHOOO!');
+      },
+    };
+
+    // Use dot notation to add new properties (keys) or update them
+    person.job = 'Data Scientist';
+    person.age = 50;
+    // Can change properties, but can't overwrite the entire object itself
+    // Can create a new object that's a copy of the other by freezing it (THIS IS IMMUTABLE)
+    // const freezePerson = Object.freeze(person);
+
+    console.log(person);
+    // Two ways of accessing properties
+    // Generally want dot, but may use square when you want to access a object using a key stored
+    // in a var; or when the property has odd, non-var name conforming structures (e.g. 777,
+    // cool-dude, etc.)
+    // console.log(person.age);
+    // console.log(person['age']);
+
+    const nameInput = document.querySelector('[name="first"]');
+
+    const name = nameInput ? nameInput.value : '';
+    console.log(name);
+
+    // Can delete properties
+    // delete person.job;
+
+    // OBJECT REFERENCE VS VALUES
+    let name1 = 'wes';
+    let name2 = 'wes';
+
+    console.log(name1 === name2);
+
+    name1 = 'ian';
+
+    console.log(name1 === name2);
+
+    // Update name1 to be what is name2
+    name1 = name2;
+    console.log(name1 === name2);
+
+    name2 = name1;
+    name2 = 'kim';
+    console.log(name1 === name2);
+
+    // Different for objects
+    // Same objects on first glance, but... person1 === person2 would return false
+    // This is because objects reference the object itself.  Not the contents inside it.
+
+    const person1 = {
+      first: 'wes',
+      last: 'bos',
+      clothing: {
+        shirts: 10,
+        pants: 2,
+      },
+    };
+
+    const person2 = {
+      first: 'wes',
+      last: 'bos',
+    };
+
+    // This also changes person1 name - BE CAREFUL
+    // In objects person3 begins referencing or pointing too the original.  Copying will avoid
+    // this behavior
+    // const person3 = person1;
+    // person3.first = 'larry';
+    // console.log(person3.first);
+    // console.log(person1.first);
+
+    // Copy an object (shallow)
+    // const person3 = { ...person1 };
+
+    // Use Lodash to copy the object deep
+    const person3 = _.cloneDeep(person1);
+    person3.first = 'larry';
+    console.log(person3.first);
+    console.log(person1.first);
+
+    // This modifies person1 as well when we use spread method even though we copied person1 into person3
+    // The reason is that these copies are "shallow" (they only go one level deep)
+    // Might want to use a utility library to deal with this (e.g. Lodash)
+    person3.clothing.shirts = 100;
+
+    // Can merge objects as well
+    const meatInventory = {
+      bacon: 2,
+      sausage: 3,
+      oyster: 10,
+    };
+
+    const veggieInventory = {
+      lettuce: 5,
+      tomatoes: 3,
+      oyster: 15,
+    };
+
+    // Spread both objects into inventory
+    // Since veggieInventory is spread after meat and oyster is in both
+    // oyster from veggie is used in inventory
+    const inventory = {
+      ...meatInventory,
+      ...veggieInventory,
+    };
+
+    // Passing in a string variable (or boolean, int, etc.),
+    // doesn't change the variable passed in if you modify in function
+    function doStuff(data) {
+      data = 'something else';
+      console.log(data);
+    }
+
+    // But an object passed in and modified in function will change the external object as well
+    // Would need to pass in as a copy instead
+    function doStuff2(data) {
+      data.tomatoes = 10000000000;
+      console.log(data);
+    }
+
+    doStuff2(inventory);
   </script>
+
 </body>
 
 </html>

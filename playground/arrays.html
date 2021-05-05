@@ -12,6 +12,81 @@
 
 <body>
 
+  <script>
+    // Array is used for creating a list of items where order matters
+    const names = ['wes', 'kait', 'snickers'];
+    // const names = new Array();
+    // can return a boolean to tell if something is an array
+    console.log(Array.isArray(names));
+
+    // Arrays are zero-based indexs
+    console.log(names[1]); // Returns second element
+    console.log(names.length); // Returns the number of elements in an array
+    console.log(names[names.length - 1]); // Returns the last element
+
+    // Mutable actions change the original thing
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    // any time you want to use a mutation method and not change the original array
+    const numbersReversed = [...numbers].reverse();
+    console.log(numbersReversed);
+
+    console.log(numbers); // original array also mutated if you don't make a copy of it
+
+    // Immutable actions make a change but return a new thing (array in this case)
+    const numbersSlice = numbers.slice(2, 4); // slice from indexes 2 up to 4
+    console.log(numbersSlice);
+    console.log(numbers); // numbers isn't mutated in this case
+    // Make sure you know if the method mutates or not!
+
+    // Add items to an array
+    names.push('lux'); // add to the end of an array
+    names.unshift('poppy'); // add to beginning of an array
+    console.log(names);
+
+    // Can slice and splice arrays - grab subsets (slice is immutable and splice is mutable)
+    numbers.splice(3, 2); // fourth and fifth elements are spliced out
+    console.log(numbers);
+
+    const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+    const newBikes = [...bikes.slice(0, 2), 'benotto', ...bikes.slice(2)]; // add a new bike in the
+    // middle
+    console.log(newBikes);
+
+    // Remove elements from an array
+    const newBikes2 = [...newBikes.slice(0, 3), ...newBikes.slice(4)]; // remove the second to last
+    console.log(newBikes2);
+
+    const comments = [
+      { text: 'Cool Beans', id: 123 },
+      { text: 'Love this', id: 133 },
+      { text: 'Neato', id: 223 },
+      { text: 'good bikes', id: 333 },
+      { text: 'so good', id: 433 },
+    ];
+
+    function deleteComment(id, comments) {
+      // first find the index of the item in the array
+      const commentIndex = comments.findIndex((comment) => comment.id === id);
+      // make a new array w/o that item in it
+      // return our new array
+      return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1),
+      ];
+    }
+
+    const kaitIndex = names.findIndex((name) => name === 'kait');
+    const newNamesWithOutKait = [
+      // get everything up to kait index
+      ...names.slice(0, kaitIndex),
+      // everything after Kait index
+      ...names.slice(kaitIndex + 1),
+    ];
+    console.log(kaitIndex);
+    console.log(newNamesWithOutKait);
+  </script>
+
 </body>
 
 </html>
