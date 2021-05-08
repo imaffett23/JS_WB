@@ -14,13 +14,72 @@
 
     const name = 'Wes Bos';
 
-    // For
+    // FOR - (generally much easier with forEach, map, reduce, etc.)
 
-    // For of
+    // for (let i = 100; i <= 120; i += 2) {
+    //   console.log(i);
+    // }
 
-    // For in
+    // for (let i = 0; i < numbers.length; i++) {
+    //   console.log(numbers[i]);
+    // }
 
-    // While Loop
+    // FOR OF - (used for looping over iterables; also useful for sequencing "promises")
+
+    // for (const letter of name) {
+    //   console.log(letter);
+    // }
+
+    // for (const number of numbers) {
+    //   console.log(number);
+    // }
+
+    // FOR IN - (used for looping over keys of an object)
+
+    const wes = {
+      name: 'wes',
+      age: 100,
+      cool: true,
+    };
+
+    for (const prop in wes) {
+      console.log(prop);
+    }
+
+    const baseHumanStats = {
+      feet: 2,
+      arms: 2,
+      eyes: 2,
+      head: 1,
+    };
+
+    function Human(name) {
+      this.name = name;
+    }
+
+    // Can give a default prototype if our object doesn't define it
+    // The prototype properties don't show up by default in the new object though
+    Human.prototype = baseHumanStats;
+
+    const wes2 = new Human('wes');
+    console.log(wes2);
+
+    // The prototype properties do show up when using FOR IN however!
+    for (const prop in wes2) {
+      console.log(prop);
+    }
+
+    // WHILE LOOP
+
+    let cool = true;
+    let i = 0;
+    while (cool === true) {
+      console.log('You are cool');
+      i += 1;
+      if (i > 100) {
+        cool = false;
+      }
+    }
   </script>
 </body>
 
