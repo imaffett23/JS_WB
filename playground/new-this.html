@@ -10,6 +10,60 @@
 
 <body>
 
+  <button class="one">Button 1</button>
+  <button class="two">Button 2</button>
+
+  <script>// NEW
+
+    // "new" creates a new object.  Allows you to access associated methods on the object
+    const myDate = new Date('August 11, 2025');
+    console.dir(myDate);
+    console.log(myDate.getFullYear());
+
+    const names = ['wes', 'kait']; // instanceof Array object - don't need new since it uses
+    // literal syntax "[]"
+    // synonomous with:
+    // const names = new Array(['wes', 'kait']);
+    const wes = { name: 'wes' };
+    // const wes = new Object({name: 'wes'});
+
+    const span = document.createElement('span'); // instanceof element object
+    // also a node object, HTMLSpanElement.  Can "inherit" other object types with "extension"
+    console.log(span);
+
+    // Make our own object
+    function Pizza(toppings = [], customer) {
+      // Save the toppings that were passed in to this instance of Pizza()
+      this.toppings = toppings;
+      this.customer = customer;
+      this.id = Math.floor(Math.random() * 1677215).toString(16);
+    }
+
+    // Create a new object that is an instanceof Pizza object
+    const pepperoniPizza = new Pizza(['pepperoni'], 'ian');
+    const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onions'], 'kim');
+
+    // THIS
+
+    // "this" refers to the instance of an object that a function is bound
+    const button1 = document.querySelector('.one');
+    const button2 = document.querySelector('.two');
+
+    // // If this was a arrow function it would likely be bound to "window".  Be careful!
+    // function tellMeAboutTheButton() {
+    //   console.log(this);
+    //   // If you create a new function in the function, "this" changes unless you save it
+    //   // Or you could use an arrow function so it inherits "this" from the higher level
+    //   setTimeout(() => {
+    //     this.textContent = 'You Clicked Me!';
+    //   }, 1000);
+    // }
+
+    // // The function is bound to the button in this case
+    // button1.addEventListener('click', tellMeAboutTheButton);
+    // button2.addEventListener('click', tellMeAboutTheButton);
+  </script>
+
 </body>
 
 </html>
