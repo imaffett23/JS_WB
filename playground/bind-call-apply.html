@@ -10,6 +10,80 @@
 
 <body>
 
+  <p>Hey</p>
+
+  <div class="wrapper">
+    <p>Hey I'm a wrapper</p>
+  </div>
+
+  <script>
+    const person = {
+      name: 'Ian Maffett',
+      sayHi() {
+        console.log(`Hey ${this.name}`);
+      },
+    };
+
+    const jenna = {
+      name: 'Jenna',
+    };
+
+    // This would be window here since it is not bound to anything
+    // const { sayHi } = person;
+
+    // Need to bind it
+    // const sayHi = person.sayHi.bind(person);
+
+    // Can even bind the method to another object!
+    // const sayHi = person.sayHi.bind(jenna);
+    const sayHi = person.sayHi.bind({ name: 'Harry' });
+
+    // Query Selector Example
+    // By calling bind against querySelector, we say when the $ function is run, use document as
+    // the this value
+    // Using bind will change the context of what "this" is associated to instead a function/method
+    const $ = document.querySelector.bind(document);
+    const lookFor = document.querySelectorAll.bind(document);
+
+    const wrapper = document.querySelector('.wrapper');
+    const p = wrapper.querySelector('p');
+    console.log(p);
+    console.log($('p'));
+    console.log(lookFor('p'));
+
+    const bill = {
+      total: 1000,
+      calculate(taxRate) {
+        return this.total + this.total * taxRate;
+      },
+      describe(mealType, drinkType, taxRate) {
+        console.log(`Your meal of ${mealType} with a drink of ${drinkType} was 
+        ${this.calculate(taxRate)}`);
+      },
+    };
+
+    const total = bill.calculate(0.13);
+    // Can pass multiple things to bind (second argument below is the functions parameter - taxRate)
+    const calc = bill.calculate.bind({ total: 500 }, 0.06);
+    console.log(calc());
+    console.log(total);
+
+    // CALL AND APPLY
+    // These call the functions for you
+    // Call also binds a function, but calls it immediately
+    const total2 = bill.calculate.call({ total: 500 }, 0.06);
+    console.log(total2);
+
+    // Apply is similar to call, but uses an array for arguments
+    const total3 = bill.calculate.apply({ total: 500 }, [0.06]);
+    console.log(total3);
+
+    const myMeal = bill.describe.call(bill, 'pizza', 'beer', 0.13);
+    const myMeal2 = bill.describe.apply(bill, ['pizza', 'beer', 0.13]);
+    console.log(myMeal);
+    console.log(myMeal2);
+  </script>
+
 </body>
 
 </html>
