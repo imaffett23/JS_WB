@@ -10,7 +10,98 @@
 
 <body>
   <script>
+    function handleError(err) {
+      console.log('Ohh nooo!');
+      console.log(err);
+    }
 
+    function makePizza(toppings = []) {
+      // Promises are made immediately, but not do not resolve until they are ready
+      return new Promise(function (resolve, reject) {
+        // Reject if people try to order with pineapple
+        if (toppings.includes('pineapple')) {
+          reject('Seriously get out!');
+        }
+        const amountOfTimeToBake = 500 + toppings.length * 200;
+        // Wait one second for the pizza to cook
+        setTimeout(function () {
+          // When you are ready "resolve" this promise
+          resolve(`Here is your pizza with the toppings ${toppings.join(', ')}`);
+        }, amountOfTimeToBake);
+        // If something went wrong, "reject" this promise
+      });
+    }
+
+    // Access the pizza itself (can chain thens to specify ordering)
+    makePizza(['pepperoni'])
+      .then(function (pizza) {
+        console.log(pizza);
+        return makePizza(['ham', 'cheese']);
+      })
+      .then(function (pizza) {
+        console.log(pizza);
+        return makePizza(['hot peppers', 'onion', 'feta']);
+      })
+      .then(function (pizza) {
+        console.log(pizza);
+      });
+
+    // Run them concurrently
+    const pizzaPromise1 = makePizza(['hot peppers', 'onion', 'feta']);
+    const pizzaPromise2 = makePizza([
+      'hot peppers',
+      'onion',
+      'feta',
+      'ham',
+      'cheese',
+      'mushrooms',
+      'sausage',
+      'jalapenos',
+    ]);
+    const pizzaPromise3 = makePizza(['ham', 'cheese']);
+
+    // Make a large promise encompassing many others (only resolves once all the children do)
+    const dinnersPromise = Promise.all([
+      pizzaPromise1,
+      pizzaPromise2,
+      pizzaPromise3,
+    ]);
+
+    dinnersPromise.then(function (pizzas) {
+      const [hotties, gargbagePlate, hamCheese] = pizzas;
+      console.log(hotties, gargbagePlate, hamCheese);
+    });
+
+    // Race will wait for the first one to wait
+    const firstPizzaPromise = Promise.race([
+      pizzaPromise1,
+      pizzaPromise2,
+      pizzaPromise3,
+    ]);
+    firstPizzaPromise.then((pizza) => {
+      console.log('You must be hungry.  Here is the first pizza ready!');
+      console.log(pizza);
+    });
+
+    // ERROR HANDLING
+    // Catch an error (defined in the promise "reject") by throwing a .catch() to the end of .then()
+    // Even if you are chaining promises, only need catch at the very end. Ends the entire chain when
+    // there is a rejection however
+    makePizza(['cheese', 'pineapple'])
+      .then((pizza) => {
+        console.log(pizza);
+      })
+      .catch(handleError);
+
+    // Settles all promises even if one throws an error!
+
+    const p1 = makePizza(['pep']);
+    const p2 = makePizza(['pineapple']);
+
+    const dinnerPromise2 = Promise.allSettled([p1, p2]);
+    dinnerPromise2.then((results) => {
+      console.log(results);
+    });
   </script>
 </body>
 
