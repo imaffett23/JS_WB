@@ -9,9 +9,85 @@
 </head>
 
 <body>
-  <script>
 
+  <script>
+    function wait(ms = 0) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    }
+
+    // Need to mark functions using as "async" if you use "await"
+
+    async function go() {
+      console.log('Starting...');
+      // Await will pause the execution of the promise based function until the promise is resolved
+      await wait(2000);
+      console.log('Running');
+      await wait(200);
+      console.log('Ending!');
+    }
+
+    // Can't do top level await (on functions that aren't async)
+
+    // go();
+
+    // // Can mark any function as async though!
+    // // Function declaration
+    // async function fd() { }
+
+    // // Arrow functions
+    // const arrowFn = async () => { };
+
+    // // Call back
+    // window.addEventListener('click', async function () { });
+
+    // //
+    // const person = {
+    //   // Method
+    //   async sayHi() { },
+    //   // Method shorthand
+    //   async sayHello() { },
+    //   // Function property
+    //   sayHey: async () => { },
+    // };
+
+    function makePizza(toppings = []) {
+      // Promises are made immediately, but not do not resolve until they are ready
+      return new Promise(function (resolve, reject) {
+        // Reject if people try to order with pineapple
+        if (toppings.includes('pineapple')) {
+          reject('Seriously get out!');
+        }
+        const amountOfTimeToBake = 500 + toppings.length * 200;
+        // Wait one second for the pizza to cook
+        setTimeout(function () {
+          // When you are ready "resolve" this promise
+          resolve(`Here is your pizza with the toppings ${toppings.join(', ')}`);
+        }, amountOfTimeToBake);
+        // If something went wrong, "reject" this promise
+      });
+    }
+
+    async function makeDinner() {
+      // Asynchronously waiting for the promise to resolve (doesn't block the rest of the JS from
+      // running) and returns the actual pizza instead of the promise
+      // The "await" call does mean that next steps in the function scope must wait however
+      // const pizza1 = await makePizza(['pepperoni']);
+      // console.log(pizza1);
+      // const pizza2 = await makePizza(['mushrooms']);
+      // console.log(pizza2);
+
+      // Can make the function scope async as follows
+      const pizzaPromise1 = makePizza(['pepperoni']);
+      const pizzaPromise2 = makePizza(['mushrooms']);
+      const [pep, mush] = await Promise.all([pizzaPromise1, pizzaPromise2]);
+      console.log(pep, mush);
+    }
+
+    makeDinner();
   </script>
+
 </body>
 
 </html>

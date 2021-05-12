@@ -9,8 +9,30 @@
 </head>
 
 <body>
-  <script>
 
+  <p class="user"></p>
+
+  <script>
+    // AJAX - Asynchronous JavaScript and XML
+    const baseEndpoint = 'https://api.github.com';
+    const usersEndpoint = `${baseEndpoint}/users`;
+    const userEl = document.querySelector('.user');
+
+    function handleError(err) {
+      console.log('ERROR:');
+      console.log(err);
+    }
+
+    async function displayUser(userName) {
+      // Fetch returns a promise
+      userEl.textContent = 'Loading...';
+      const response = await fetch(`${usersEndpoint}/${userName}`);
+      const data = await response.json();
+      console.log(data);
+      userEl.textContent = `${data.name} - ${data.blog}`;
+    }
+
+    displayUser('wesbos').catch(handleError);
   </script>
 </body>
 
