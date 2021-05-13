@@ -4,7 +4,7 @@ const form = document.querySelector('form.search');
 const recipesGrid = document.querySelector('.recipes');
 
 async function fetchRecipes(query) {
-  const res = await fetch(`${proxy}${baseEndpoint}?q=${query}`);
+  const res = await fetch(`${proxy}${baseEndpoint}/?q=${query}`);
   const data = await res.json();
   return data;
 }
@@ -29,11 +29,13 @@ async function fetchAndDisplay(query) {
 function displayRecipes(recipes) {
   console.log('Creating HTML');
   const html = recipes.map(
-    recipe => `<div class="recipe">
+    (recipe) => `<div class="recipe">
       <h2>${recipe.title}</h2>
       <p>${recipe.ingredients}</p>
-      ${recipe.thumbnail &&
-        `<img src="${recipe.thumbnail}" alt="${recipe.title}"/>`}
+      ${
+        recipe.thumbnail &&
+        `<img src="${recipe.thumbnail}" alt="${recipe.title}"/>`
+      }
       <a href="${recipe.href}">View Recipe →</a>
     </div>`
   );
