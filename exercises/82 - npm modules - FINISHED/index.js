@@ -50,7 +50,7 @@ const person2 = { name: 'wes' };
 console.log(isEqual(person1, person2));
 
 function checkIfNameIsCool(firstName) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     if (firstName === 'Wes') {
       resolve('Cool name');
       return;
@@ -60,7 +60,7 @@ function checkIfNameIsCool(firstName) {
 }
 
 async function checkName() {
-  const [err, successValue] = await to(checkIfNameIsCool('snickers'));
+  const [err, successValue] = await to(checkIfNameIsCool('wes'));
   if (err) {
     // deal with it
     console.log(err);
